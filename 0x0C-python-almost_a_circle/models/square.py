@@ -87,5 +87,5 @@ class Square(Rectangle):
         dict2['x'] = dict1['_Rectangle__x']
         dict2['y'] = dict1['_Rectangle__y']
 
-        return dict2i
+        return dict2
 
