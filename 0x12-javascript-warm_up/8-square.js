@@ -1,9 +1,11 @@
 #!/usr/bin/node
-const size = parseInt(process.argv[2]);
-
-if (isNaN(size))
-    console.log("Missing size");
-else if (size <= 0)
-    console.log("Size must be a positive number");
-else
-    console.log(Array(size).fill("X".repeat(size)).join("\n"));
+const size = Math.floor(Number(process.argv[2]));
+if (isNaN(size)) {
+  console.log('Missing size');
+} else {
+  for (let r = 0; r < size; r++) {
+    let row = '';
+    for (let c = 0; c < size; c++) row += 'X';
+    console.log(row);
+  }
+}
