@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all the State objects from the database hbtn_0e_6_usa
+Prints the State object with the name passed as argument from the db
 """
 import sys
 from model_state import Base, State
@@ -15,7 +15,5 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    states = session.query(State).order_by(State.id).all()
-
-    for state in states:
-        print("{}: {}".format(state.id, state.name))
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
+    print("Not found" if not state else state.id)
