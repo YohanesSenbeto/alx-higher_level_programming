@@ -2,13 +2,15 @@
 """
 This script fetches the status from 'https://alx-intranet.hbtn.io/status' using urllib.
 """
-from urllib import request
+
 
 if __name__ == "__main__":
+    import urllib.request
+
     url = 'https://alx-intranet.hbtn.io/status'
     
     # Fetching the URL using urllib and using a with statement
-    with request.urlopen(url) as response:
+    with urllib.request.urlopen(url) as response:
         # Reading the response body
         body = response.read()
         
