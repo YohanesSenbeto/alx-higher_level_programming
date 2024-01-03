@@ -9,17 +9,24 @@ request.get(apiUrl, function (error, response, body) {
   if (error) {
     console.error(error);
   } else {
-    const movie = JSON.parse(body);
-    const characterUrls = movie.characters;
+    if (response.headers['content-type'].startsWith('application/json')) {
+      const movie = JSON.parse(body);
+      const characterUrls = movie.characters;
 
-    characterUrls.forEach(characterUrl => {
-      request.get(characterUrl, function (error, response, body) {
-        if (error) {
-          console.error(error);
-        } else {
-          const character = JSON.parse(body);
-          console.log(character.name);
-        }
-      });
-    });
+      const fetchCharacter = (url) => {
+        request.get(url, function (error, response, body) {
+          if (error) {
+            console.error(error);
+          } else {
+            const character = JSON.parse(body);
+            console.log(character.name);
+          }
+        });
+      };
+
+      characterUrls.forEach(fetchCharacter);
+    } else {
+      console.error('Invalid response: Expected JSON but received HTML');
+    }
   }
+});
